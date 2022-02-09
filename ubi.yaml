@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ubi
+  labels:
+    app: ubi
+    app.kubernetes.io/component: ubi
+    app.kubernetes.io/instance: ubi
+    app.kubernetes.io/name: ubi
+    app.kubernetes.io/part-of: ubi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubi
+  template:
+    metadata:
+      labels:
+        app: ubi
+    spec:
+      containers:
+        - name: ubi
+          command:
+            - /bin/sh
+          image: registry.access.redhat.com/ubi8/ubi:latest
+          args:
+            - '-c'
+            - while true; do echo hello; sleep 10;done
+
